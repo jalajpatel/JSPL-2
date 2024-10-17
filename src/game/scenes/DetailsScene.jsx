@@ -261,9 +261,13 @@ showFinalScore() {
         shadow: { offsetX: 3, offsetY: 3, color: '#000000', blur: 4, fill: true }
     }).setOrigin(0.5);
 
+    // Reset score and attempts to their initial state
+    this.score = 0;
+    this.attempts = 0;
+
     // Show the final score for 5 seconds before redirecting to the instruction page
     this.time.delayedCall(5000, () => {
-        this.scene.start('IntroScene');  // Redirect to the instruction page
+        this.scene.start('IntroScene');  // Redirect to the instruction page and reset the game
     });
 }
 
