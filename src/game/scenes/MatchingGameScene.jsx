@@ -97,7 +97,4 @@ class IntroScene extends Phaser.Scene {
         });
     }
 }
-
-
-
 export default IntroScene;
