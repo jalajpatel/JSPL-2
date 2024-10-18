@@ -35,7 +35,7 @@ class BeeDanceGameScene extends Phaser.Scene {
 
         // Add instruction text on the left side
         this.add.text(50, height / 2 - 50, 'Watch the dance and\nchoose the correct flower:', {
-            fontSize: '36px',
+            fontSize: '50px',
             fontFamily: 'Arial',
             color: '#ffffff',
             align: 'left',
@@ -43,7 +43,7 @@ class BeeDanceGameScene extends Phaser.Scene {
         }).setOrigin(0);
 
         // Draw a rectangle on the right side for the video
-        const rectWidth = width / 2.5;
+        const rectWidth = width / 3.55;
         const rectHeight = height / 2;
         const rectX = width - rectWidth - 50;
         const rectY = height / 2 - rectHeight / 2;
