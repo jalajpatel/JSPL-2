@@ -68,73 +68,69 @@ class DetailsScene extends Phaser.Scene {
     }
 
     create(data) {
-        const { width, height } = this.sys.game.config;
-        const correctFlower = data.correctFlower;  // Receive the correct flower from BeeDanceGameScene
-        this.score = data.score || 0; // Use the score passed from the previous scene
+         const { width, height } = this.sys.game.config;
+    const correctFlower = data.correctFlower;
+    this.score = data.score || 0;
 
-        // Add the background image, scaling it to fill the screen
-        this.add.image(width / 2, height / 2, 'bgImage').setDisplaySize(width, height);
+    // Add the background image, scaling it to fill the screen
+    this.add.image(width / 2, height / 2, 'bgImage').setDisplaySize(width, height);
 
-        // Add the beehive image in the middle of the screen, making it smaller
-        const beehive = this.add.image(width / 1.95, height / 1.78, 'beehive').setDisplaySize(150, 150);
+    // Set the size of the beehive based on screen size
+    const isBigScreen = width > 1900; // For screens larger than 1900px
+    const beehiveSize = isBigScreen ? 400 : 170; // Adjust size for larger screens
 
-        // Get all flower textures and filter out the correct one
-        const allFlowers = [
-            'flower1', 'flower2',
-            'flower5', 'flower6', 'flower7', 'flower8',
-            'flower9', 'flower10', 'flower11', 'flower12'
-        ];
+    const beehiveX = width / 2 + 30;
+    const beehiveY = height / 2;
+    const beehive = this.add.image(beehiveX, beehiveY, 'beehive')
+        .setDisplaySize(beehiveSize, beehiveSize)
+        .setOrigin(0.5);
 
-        const incorrectFlowers = allFlowers.filter(flower => flower !== correctFlower);
+    // Set flower sizes based on screen width
+    const flowerSize = isBigScreen ? 280 : 160; // Larger size for bigger screens
+    const verticalSpacing = isBigScreen ? 150 : 100;
+    const horizontalSpacing = isBigScreen ? 200 : 150;
 
-        // Randomly select three incorrect flowers
-        const randomIncorrectFlowers = Phaser.Utils.Array.Shuffle(incorrectFlowers).slice(0, 3);
+    // Random flower selection logic stays the same
+    const allFlowers = [
+        'flower1', 'flower2',
+        'flower5', 'flower6', 'flower7', 'flower8',
+        'flower9', 'flower10', 'flower11', 'flower12'
+    ];
+    const incorrectFlowers = allFlowers.filter(flower => flower !== correctFlower);
+    const randomIncorrectFlowers = Phaser.Utils.Array.Shuffle(incorrectFlowers).slice(0, 3);
+    const displayedFlowers = Phaser.Utils.Array.Shuffle([correctFlower, ...randomIncorrectFlowers]);
 
-        // Combine the correct flower with the selected incorrect ones and shuffle them
-        const displayedFlowers = Phaser.Utils.Array.Shuffle([correctFlower, ...randomIncorrectFlowers]);
-
-        // Adjust spacing and size for flowers, ensuring they fit within one screen
-        const flowerSize = 100;
-        const verticalSpacing = 100;
-        const horizontalSpacing = 150;
-
-        // Display the flowers while maintaining their specific locations
-        if (displayedFlowers.includes('flower1')) {
-            this.createClickableFlower(width / 1.9, height / 2 - 2.4 * verticalSpacing, 'flower1', flowerSize, correctFlower);
-        }
-        if (displayedFlowers.includes('flower2')) {
-            this.createClickableFlower(width / 1.9, height / 2 - 1.4 * verticalSpacing, 'flower2', flowerSize, correctFlower);
-        }
-        // if (displayedFlowers.includes('flower3')) {
-        //     this.createClickableFlower(width / 1.9, height / 2 - verticalSpacing, 'flower3', flowerSize, correctFlower);
-        // }
-        // if (displayedFlowers.includes('flower4')) {
-        //     this.createClickableFlower(width / 1.9, height / 2 + verticalSpacing, 'flower4', flowerSize, correctFlower);
-        // }
-        if (displayedFlowers.includes('flower5')) {
-            this.createClickableFlower(width / 1.9, height / 2 + 1.8 * verticalSpacing, 'flower5', flowerSize, correctFlower);
-        }
-        if (displayedFlowers.includes('flower6')) {
-            this.createClickableFlower(width / 1.9, height / 2 + 2.7 * verticalSpacing, 'flower6', flowerSize, correctFlower);
-        }
-        if (displayedFlowers.includes('flower7')) {
-            this.createClickableFlower(width / 2 - 3 * horizontalSpacing, height / 1.85, 'flower7', flowerSize, correctFlower);
-        }
-        if (displayedFlowers.includes('flower8')) {
-            this.createClickableFlower(width / 2 - 2 * horizontalSpacing, height / 1.85, 'flower8', flowerSize, correctFlower);
-        }
-        if (displayedFlowers.includes('flower9')) {
-            this.createClickableFlower(width / 2 - horizontalSpacing, height / 1.85, 'flower9', flowerSize, correctFlower);
-        }
-        if (displayedFlowers.includes('flower10')) {
-            this.createClickableFlower(width / 2 + horizontalSpacing, height / 1.85, 'flower10', flowerSize, correctFlower);
-        }
-        if (displayedFlowers.includes('flower11')) {
-            this.createClickableFlower(width / 2 + 2 * horizontalSpacing, height / 1.85, 'flower11', flowerSize, correctFlower);
-        }
-        if (displayedFlowers.includes('flower12')) {
-            this.createClickableFlower(width / 2 + 3 * horizontalSpacing, height / 1.85, 'flower12', flowerSize, correctFlower);
-        }
+    // Adjust positions dynamically based on screen size
+    if (displayedFlowers.includes('flower1')) {
+        this.createClickableFlower(width / 1.9, height / 2 - 2.4 * verticalSpacing, 'flower1', flowerSize, correctFlower);
+    }
+    if (displayedFlowers.includes('flower2')) {
+        this.createClickableFlower(width / 1.9, height / 2 - 1.4 * verticalSpacing, 'flower2', flowerSize, correctFlower);
+    }
+    if (displayedFlowers.includes('flower5')) {
+        this.createClickableFlower(width / 1.9, height / 2 + 1.8 * verticalSpacing, 'flower5', flowerSize, correctFlower);
+    }
+    if (displayedFlowers.includes('flower6')) {
+        this.createClickableFlower(width / 1.9, height / 2 + 2.7 * verticalSpacing, 'flower6', flowerSize, correctFlower);
+    }
+    if (displayedFlowers.includes('flower7')) {
+        this.createClickableFlower(width / 2 - 3 * horizontalSpacing, height / 1.85, 'flower7', flowerSize, correctFlower);
+    }
+    if (displayedFlowers.includes('flower8')) {
+        this.createClickableFlower(width / 2 - 2 * horizontalSpacing, height / 1.85, 'flower8', flowerSize, correctFlower);
+    }
+    if (displayedFlowers.includes('flower9')) {
+        this.createClickableFlower(width / 2 - horizontalSpacing, height / 1.85, 'flower9', flowerSize, correctFlower);
+    }
+    if (displayedFlowers.includes('flower10')) {
+        this.createClickableFlower(width / 2 + horizontalSpacing, height / 1.85, 'flower10', flowerSize, correctFlower);
+    }
+    if (displayedFlowers.includes('flower11')) {
+        this.createClickableFlower(width / 2 + 2 * horizontalSpacing, height / 1.85, 'flower11', flowerSize, correctFlower);
+    }
+    if (displayedFlowers.includes('flower12')) {
+        this.createClickableFlower(width / 2 + 3 * horizontalSpacing, height / 1.85, 'flower12', flowerSize, correctFlower);
+    }
 
         // Add Instruction Button at the top-left corner
         const instructionButton = this.add.text(20, 20, 'Instructions', {
@@ -270,8 +266,5 @@ showFinalScore() {
         this.scene.start('IntroScene');  // Redirect to the instruction page and reset the game
     });
 }
-
-
 }
-
 export default DetailsScene;
