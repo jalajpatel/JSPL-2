@@ -126,15 +126,54 @@ class BeeDanceGameScene extends Phaser.Scene {
             alert("Watch the bee's dance closely and select the correct flower from the garden!");
         });
 
-        // // Initialize and display score counter at the top-right corner
-        // this.score = 0;
-        // this.scoreText = this.add.text(width - 150, 20, `Score: ${this.score}`, {
-        //     fontSize: '24px',
-        //     fontFamily: 'Arial',
-        //     color: '#ffffff',
-        //     backgroundColor: '#000000',
-        //     padding: { left: 10, right: 10, top: 5, bottom: 5 }
-        // });
+        // Add Quit Button at the top-right corner
+        const quitButton = this.add.text(width - 100, 20, 'Quit', {
+            fontSize: '24px',
+            fontFamily: 'Arial',
+            color: '#ffffff',
+            backgroundColor: '#ff0000',
+            padding: { left: 10, right: 10, top: 5, bottom: 5 }
+        }).setInteractive({ useHandCursor: true });
+
+        quitButton.on('pointerdown', () => {
+            // Display a custom confirmation text
+            const confirmationText = this.add.text(width / 2, height / 2, 'Are you sure you want to quit?', {
+                fontSize: '32px',
+                fontFamily: 'Arial',
+                color: '#ff0000',
+                backgroundColor: '#000000',
+                padding: { left: 20, right: 20, top: 10, bottom: 10 }
+            }).setOrigin(0.5);
+
+            // Add Yes and No buttons for the user to select
+            const yesButton = this.add.text(width / 2 - 100, height / 2 + 50, 'Yes', {
+                fontSize: '28px',
+                fontFamily: 'Arial',
+                color: '#00ff00',
+                backgroundColor: '#000000',
+                padding: { left: 10, right: 10, top: 5, bottom: 5 }
+            }).setInteractive({ useHandCursor: true }).setOrigin(0.5);
+
+            const noButton = this.add.text(width / 2 + 100, height / 2 + 50, 'No', {
+                fontSize: '28px',
+                fontFamily: 'Arial',
+                color: '#ff0000',
+                backgroundColor: '#000000',
+                padding: { left: 10, right: 10, top: 5, bottom: 5 }
+            }).setInteractive({ useHandCursor: true }).setOrigin(0.5);
+
+            // Handle Yes click: Restart the game
+            yesButton.on('pointerdown', () => {
+                this.scene.start('IntroScene'); // Restart the game by going back to IntroScene
+            });
+
+            // Handle No click: Remove the confirmation dialog
+            noButton.on('pointerdown', () => {
+                confirmationText.destroy();
+                yesButton.destroy();
+                noButton.destroy();
+            });
+        });
     }
 
     // Function to update score
