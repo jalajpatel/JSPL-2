@@ -146,7 +146,7 @@ class DetailsScene extends Phaser.Scene {
         });
 
         // Display score at the top-right corner
-        this.scoreText = this.add.text(width - 150, 20, `Score: ${this.score}`, {
+        this.scoreText = this.add.text(width - 1, 20, `Score: ${this.score}`, {
             fontSize: '24px',
             fontFamily: 'Arial',
             color: '#ffffff',
@@ -247,7 +247,7 @@ showFinalScore() {
     finalPopupBg.fillRect(0, 0, width, height);
 
     // Create the final score text with cumulative score (this.score holds the total score)
-    const finalScoreText = this.add.text(width / 2, height / 2, `Your score in your last attempt: ${this.score}`, {
+    const finalScoreText = this.add.text(width / 2, height / 2, `You have completed your attempts. \n Feel free to continue learning at your own pace!`, {
         fontSize: '36px',
         fontFamily: 'Arial',
         color: '#ffffff',
