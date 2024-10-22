@@ -3,20 +3,21 @@ import Phaser from 'phaser';
 class BeeDanceGameScene extends Phaser.Scene {
     constructor() {
         super({ key: 'lvl2' });
+        this.score = 0; // Initialize score
     }
 
     preload() {
-        // Load all the videos from the assets folder
-        this.load.video('Down-Short', 'public/assets/Down-Short.mp4');
-        this.load.video('Left-Short', 'public/assets/Left-Short.mp4');
-        this.load.video('Down-Long', 'public/assets/Down-Long.mp4');
-        this.load.video('Left-Long', 'public/assets/Left-Long.mp4');
-        this.load.video('Right-Long', 'public/assets/Right-Long.mp4');
-        this.load.video('Right-Short', 'public/assets/Right-Short.mp4');
-        this.load.video('Round-Left', 'public/assets/Round-Left.mp4');
-        this.load.video('Round-Right', 'public/assets/Round-Right.mp4');
-        this.load.video('Up-Long', 'public/assets/Up-Long.mp4');
-        this.load.video('Up-Short', 'public/assets/Up-Short.mp4');
+        // Load all the videos from the assets folder (Corrected paths for Vercel)
+        this.load.video('Down-Short', '/assets/Down-Short.mp4');
+        this.load.video('Left-Short', '/assets/Left-Short.mp4');
+        this.load.video('Down-Long', '/assets/Down-Long.mp4');
+        this.load.video('Left-Long', '/assets/Left-Long.mp4');
+        this.load.video('Right-Long', '/assets/Right-Long.mp4');
+        this.load.video('Right-Short', '/assets/Right-Short.mp4');
+        this.load.video('Round-Left', '/assets/Round-Left.mp4');
+        this.load.video('Round-Right', '/assets/Round-Right.mp4');
+        this.load.video('Up-Long', '/assets/Up-Long.mp4');
+        this.load.video('Up-Short', '/assets/Up-Short.mp4');
     }
 
     create() {
