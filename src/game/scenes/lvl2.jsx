@@ -126,15 +126,15 @@ class BeeDanceGameScene extends Phaser.Scene {
             alert("Watch the bee's dance closely and select the correct flower from the garden!");
         });
 
-        // Initialize and display score counter at the top-right corner
-        this.score = 0;
-        this.scoreText = this.add.text(width - 150, 20, `Score: ${this.score}`, {
-            fontSize: '24px',
-            fontFamily: 'Arial',
-            color: '#ffffff',
-            backgroundColor: '#000000',
-            padding: { left: 10, right: 10, top: 5, bottom: 5 }
-        });
+        // // Initialize and display score counter at the top-right corner
+        // this.score = 0;
+        // this.scoreText = this.add.text(width - 150, 20, `Score: ${this.score}`, {
+        //     fontSize: '24px',
+        //     fontFamily: 'Arial',
+        //     color: '#ffffff',
+        //     backgroundColor: '#000000',
+        //     padding: { left: 10, right: 10, top: 5, bottom: 5 }
+        // });
     }
 
     // Function to update score
